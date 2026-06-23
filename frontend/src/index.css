@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes liquid-morph {
+  0%,
+  100% {
+    border-radius: 58% 42% 45% 55% / 46% 52% 48% 54%;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    border-radius: 43% 57% 62% 38% / 58% 39% 61% 42%;
+    transform: translate3d(18px, 22px, 0) rotate(18deg) scale(1.12);
+  }
+}
+
+.liquid-glass-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: min(88vw, 360px);
+  height: 145px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1.5rem;
+  border: 1px solid rgba(245, 194, 231, 0.42);
+  border-radius: 1.75rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), transparent 34%),
+    linear-gradient(325deg, rgba(137, 180, 250, 0.13), rgba(203, 166, 247, 0.08) 55%, rgba(49, 50, 68, 0.18));
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.52),
+    inset -1px -1px 0 rgba(137, 180, 250, 0.18),
+    inset 0 0 32px rgba(203, 166, 247, 0.08),
+    0 24px 70px rgba(17, 17, 27, 0.38);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.liquid-glass-card::before {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.34), transparent 22%, transparent 68%, rgba(203, 166, 247, 0.14));
+  content: "";
+  pointer-events: none;
+}
+
+.liquid-glass-card::after {
+  position: absolute;
+  z-index: 3;
+  inset: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: calc(1.75rem - 7px);
+  content: "";
+  pointer-events: none;
+}
+
+.liquid-glass-card:hover {
+  transform: translateY(-10px) scale(1.015);
+  border-color: rgba(245, 194, 231, 0.74);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.66),
+    inset -1px -1px 0 rgba(137, 180, 250, 0.25),
+    inset 0 0 40px rgba(203, 166, 247, 0.14),
+    0 30px 90px rgba(203, 166, 247, 0.24);
+}
+
+.liquid-glass-card:focus-visible {
+  outline: 2px solid #cba6f7;
+  outline-offset: 5px;
+}
+
+.liquid-glass-blob {
+  position: absolute;
+  z-index: -1;
+  width: 18rem;
+  height: 18rem;
+  filter: blur(38px);
+  opacity: 0.34;
+  animation: liquid-morph 8s ease-in-out infinite;
+  transition: opacity 300ms ease;
+}
+
+.liquid-glass-blob--top {
+  top: -7rem;
+  right: -6rem;
+  background: #cba6f7;
+}
+
+.liquid-glass-blob--bottom {
+  bottom: -8rem;
+  left: -7rem;
+  background: #89b4fa;
+  animation-delay: -4s;
+  animation-direction: reverse;
+}
+
+.liquid-glass-card:hover .liquid-glass-blob {
+  opacity: 0.5;
+}
+
+.liquid-glass-shine {
+  position: absolute;
+  z-index: 4;
+  top: -30%;
+  left: -65%;
+  width: 42%;
+  height: 160%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  filter: blur(5px);
+  transition: left 700ms ease;
+  pointer-events: none;
+}
+
+.liquid-glass-card:hover .liquid-glass-shine {
+  left: 125%;
+}
+
+.liquid-glass-title {
+  position: relative;
+  z-index: 5;
+  color: #cdd6f4;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 2px 16px rgba(17, 17, 27, 0.75);
+  transition: color 300ms ease, transform 300ms ease;
+}
+
+.liquid-glass-card:hover .liquid-glass-title {
+  color: #f5c2e7;
+  transform: scale(1.03);
+}
+
+@media (min-width: 640px) {
+  .liquid-glass-card {
+    width: 360px;
+    height: 520px;
+    padding: 2rem;
+    border-radius: 2.25rem;
+  }
+
+  .liquid-glass-card::after {
+    border-radius: calc(2.25rem - 7px);
+  }
+
+  .liquid-glass-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-card,
+  .liquid-glass-title,
+  .liquid-glass-shine {
+    transition-duration: 0.01ms;
+  }
+
+  .liquid-glass-blob {
+    animation: none;
+  }
+}
