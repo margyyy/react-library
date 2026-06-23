@@ -656,13 +656,19 @@ Questo meccanismo evita che l'utente veda spazi vuoti durante il caricamento del
 
 Per verificare il funzionamento del progetto è necessario avviare separatamente backend e frontend. Il backend deve essere eseguito per primo, perché il frontend recupera libri e autori tramite richieste HTTP verso le API esposte dal server.
 
-Nella cartella del backend si esegue:
+Nella cartella del backend, prima dell'avvio, si installano le dipendenze con:
+
+```bash
+bun install
+```
+
+Successivamente si esegue:
 
 ```bash
 bun run dev
 ```
 
-Il comando usa lo script `dev` definito nel backend ed esegue il server in modalità sviluppo. In alternativa è possibile avviare il server senza modalità watch:
+Il comando `bun run dev` usa lo script `dev` definito nel backend ed esegue il server in modalità sviluppo. In alternativa è possibile avviare il server senza modalità watch:
 
 ```bash
 bun run start
